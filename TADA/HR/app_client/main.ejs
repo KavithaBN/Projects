@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html ng-app="meanApp" >
+<head>
+  <title>CmpE295B</title>
+  <base href="http://localhost:8080/" />
+  <link rel="stylesheet" href="lib/bootstrap/css/bootstrap.min.css">
+  <link rel="stylesheet" href="lib/bootstrap/css/bootstrap-theme.min.css">
+  <link rel="stylesheet" type="text/css" id="theme" href="css/theme-default.css"/>
+  <link rel="stylesheet" type="text/css" id="theme" href="css/angular-material.min.css"/>
+  <link rel="stylesheet" type="text/css" href="css/slider.css"/>
+  <link rel="stylesheet" href="css/main.css">
+
+  <style type="text/css">
+
+  .node {
+    cursor: pointer;
+  }
+
+  .overlay{
+    background-color:#EEE;
+  }
+
+  .node circle {
+    fill: #fff;
+    stroke: steelblue;
+    stroke-width: 3.5px;
+  }
+
+  .node text {
+    font-size:15px;
+    font-family:sans-serif;
+  }
+
+  .link {
+    fill: none;
+    stroke: #ccc;
+    stroke-width: 1.5px;
+  }
+
+  .templink {
+    fill: none;
+    stroke: red;
+    stroke-width: 3px;
+  }
+
+  .ghostCircle.show{
+    display:block;
+  }
+
+  .ghostCircle, .activeDrag .ghostCircle{
+    display: none;
+  }
+
+  #ex1Slider .slider-selection {
+	background: #BABABA;
+}
+
+  </style>
+  <script  src="js/plugins/jquery/jquery.min.js"></script>
+  <script  src="js/plugins/jquery/jquery-ui.min.js"></script>
+  <script src="lib/angular/angular.min.js"></script>
+  <script src="lib/angular/angular-route.min.js"></script>
+  <script src="lib/angular/angular-animate.min.js"></script>
+  <script src="lib/angular/angular-aria.min.js"></script>
+  <script src="lib/angular/lodash.js"></script>
+  <script src="lib/angular/moment.js"></script>
+  <script src="lib/angular/bootstrap-tagsinput-angular.js"></script>
+
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+  <script src="lib/angular/bootstrap-tagsinput.js"></script>
+  <script src="./main.js"></script>
+
+  <script src="../profile/profile.controller.js"></script>
+  <script src="../jobs/jobs.controller.js"></script>
+  <script src="../jobProfile/jobProfile.controller.js"></script>
+  <script src="../postJob/postJob.controller.js"></script>
+  <script src="../teams/teams.controller.js"></script>
+  <script src="../candidateProfiles/candidateProfiles.controller.js"></script>
+
+</head>
+<body>
+
+  <script>
+  localStorage.setItem('username', "<%= _id %>" );
+  </script>
+
+  <!-- START PAGE CONTAINER -->
+  <div class="page-container">
+    <!-- START PAGE SIDEBAR -->
+    <div class="page-sidebar">
+      <!-- START X-NAVIGATION -->
+      <ul class="x-navigation">
+        <li class="xn-logo">
+          <a href="profile"><%= name %></a>
+          <a href="#" class="x-navigation-control"></a>
+        </li>
+        <li class="xn-profile">
+          <a href="#" class="profile-mini">
+            <img src="<%= picUrl %>" alt="<%= name %>"/>
+          </a>
+          <div class="profile">
+            <div class="profile-image">
+              <img src="<%= picUrl %>" alt="<%= name %>"/>
+            </div>
+            <div class="profile-data">
+              <div class="profile-data-name" > <%= name %> </div>
+              <div class="profile-data-title"><%= email %></div>
+            </div>
+          </div>
+        </li>
+        <li class="xn-title">Navigation</li>
+        <li id="dashboard" >
+          <a href="profile"><span class="fa fa-desktop"></span> <span class="xn-text">Dashboard</span></a>
+        </li>
+        <li id="teams" >
+          <a href="/teams"><span class="fa fa-sort-amount-desc"></span> <span class="xn-text">Recommended Teams</span></a>
+        </li>
+        <li id="jobs" >
+          <a href="/jobs"><span class="fa fa-linkedin"></span> <span class="xn-text">Jobs</span></a>
+        </li>
+        <li id="profiles" >
+          <a href="/candidateProfiles"><span class="fa fa-group"></span> <span class="xn-text">Candidate Profiles</span></a>
+        </li>
+      </ul>
+      <!-- END X-NAVIGATION -->
+    </div>
+    <!-- END PAGE SIDEBAR -->
+    <div ng-view></div>
+    <!-- END PAGE CONTENT -->
+  </div>
+  <!-- END PAGE CONTAINER -->
+
+  <!-- MESSAGE BOX-->
+  <div class="message-box animated fadeIn" data-sound="alert" id="mb-signout">
+    <div class="mb-container">
+      <div class="mb-middle">
+        <div class="mb-title"><span class="fa fa-sign-out"></span> Log <strong>Out</strong> ?</div>
+        <div class="mb-content">
+          <p>Are you sure you want to log out?</p>
+          <p>Press No if youwant to continue work. Press Yes to logout current user.</p>
+        </div>
+        <div class="mb-footer">
+          <div class="pull-right">
+            <a href="/logout" class="btn btn-success btn-lg">Yes</a>
+            <button class="btn btn-default btn-lg mb-control-close">No</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/dndTree.js"></script>
+  <script  src="js/plugins/jquery/jquery.min.js"></script>
+  <script  src="js/plugins/jquery/jquery-ui.min.js"></script>
+  <script  src="js/plugins/bootstrap/bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/plugins/bootstrap/bootstrap-datepicker.js"></script>
+  <script type="text/javascript" src="js/plugins/bootstrap/bootstrap-timepicker.min.js"></script>
+  <script type="text/javascript" src="js/plugins/bootstrap/bootstrap-colorpicker.js"></script>
+  <script type="text/javascript" src="js/plugins/bootstrap/bootstrap-file-input.js"></script>
+  <script type="text/javascript" src="js/plugins/bootstrap/bootstrap-select.js"></script>
+  <script type='text/javascript' src='js/plugins/icheck/icheck.min.js'></script>
+  <script type="text/javascript" src="js/plugins/mcustomscrollbar/jquery.mCustomScrollbar.min.js"></script>
+  <script type="text/javascript" src="js/plugins/scrolltotop/scrolltopcontrol.js"></script>
+  <script type="text/javascript" src="js/plugins/morris/raphael-min.js"></script>
+  <script type="text/javascript" src="js/plugins/morris/morris.min.js"></script>
+  <script type="text/javascript" src="js/plugins/rickshaw/d3.v3.js"></script>
+  <script type="text/javascript" src="js/plugins/rickshaw/rickshaw.min.js"></script>
+  <script type='text/javascript' src='js/plugins/jvectormap/jquery-jvectormap-1.2.2.min.js'></script>
+  <script type='text/javascript' src='js/plugins/jvectormap/jquery-jvectormap-world-mill-en.js'></script>
+  <script type='text/javascript' src='js/plugins/bootstrap/bootstrap-datepicker.js'></script>
+  <script type="text/javascript" src="js/plugins/owl/owl.carousel.min.js"></script>
+  <script type="text/javascript" src="js/plugins/moment.min.js"></script>
+  <script type="text/javascript" src="js/plugins/daterangepicker/daterangepicker.js"></script>
+  <script type="text/javascript" src="js/plugins/tagsinput/jquery.tagsinput.min.js"></script>
+  <script type="text/javascript" src="js/settings.js"></script>
+  <script type="text/javascript" src="js/plugins.js"></script>
+  <script type="text/javascript" src="js/actions.js"></script>
+  <script type="text/javascript" src="js/demo_dashboard.js"></script>
+
+</body>
+</html>
